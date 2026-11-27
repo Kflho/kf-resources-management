@@ -1,8 +1,24 @@
 {
   "schema": 1,
   "note": "每台电脑要装的 skill 清单。项目名对应 local.json 的 projects.items；第三方 skill 没有本地仓库，只登记来源。路径不进这里，harness 目录由 local.json 的 skills.harness_dirs 覆盖。",
-  "harness_dirs": ["~/.dsh/skills"],
+  "harness_dirs": [
+    "~/.dsh/skills"
+  ],
   "skills": [
+    {
+      "name": "kf-resources-management",
+      "project": "kf-resources-management",
+      "mode": "link",
+      "origin": "local",
+      "note": "资源管理：项目、清单、配置、git、网盘、skill、文档位置"
+    },
+    {
+      "name": "kf-standard",
+      "project": "kf-standard",
+      "mode": "link",
+      "origin": "local",
+      "note": "个人规范：文字、配图、图表、文档管理"
+    },
     {
       "name": "kf-personal-service",
       "project": "kf-personal-service",

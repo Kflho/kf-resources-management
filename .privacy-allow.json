@@ -1,0 +1,8 @@
+{
+  "allow": [
+    "d:/data",
+    "c:/kf-relay",
+    "c:/program files/vivaldi",
+    "release-config.json"
+  ]
+}
