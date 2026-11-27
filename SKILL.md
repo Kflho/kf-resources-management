@@ -5,7 +5,7 @@ description: kf 相关资源的管理：隐私数据（放 kf-personal-data）�
 
 # kf-resources-management
 
-本 skill 登记 kf 的资源：隐私、配置、项目、git、网盘、skill、服务器与文档位置。规范怎么写由 `kf-standard` 定，怎么操作由 `kf-personal-service` 定；本 skill 只回答资源放在哪、属于谁、怎么登记。
+本 skill 登记 kf 的资源：隐私、配置、项目、git、网盘、skill、服务器与文档位置。规范由 `kf-standard` 规定，操作由 `kf-personal-service` 提供；本 skill 只规定资源的位置、归属与登记方式。
 
 ## 能力分层
 
