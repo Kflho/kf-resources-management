@@ -3,7 +3,7 @@
 私有数据仓是**传输层**，不是代码仓，也不是备份仓。它只放两台电脑之间需要对齐的
 项目清单和可移植配置；源码留在各自仓库，大文件/密钥不进来。
 
-仓库地址不写死在技能里：本机 clone 路径填 `local.json` 的 `data_hub.path`，
+仓库地址不硬编码在技能里：本机 clone 路径填 `local.json` 的 `data_hub.path`，
 `owner/repo` 填 `data_hub.repo`（`gh_mailbox.py` 用它）。
 
 ## 目录
@@ -219,13 +219,13 @@ python scripts/projects/hub.py skills validate <file-or-dir>
 - 字典递归合并；列表里只要有一个占位符就整条跳过（位置会错位，不安全）；
 - 旧布局 `config/<HOST>.json` 仍能被 `skills diff` / `skills import` 读到
   （标 `legacy`），两台机器都导出新布局后可以删；
-- `import` 默认只预览，加 `--apply` 才写；写完跑一遍
+- `import` 默认只预览，加 `--apply` 才写；写完执行一次
   `python <kf-dev>/scripts/privacy/scan.py --root <hub>`。
 
 ## 网盘：去重与删除（必须报告）
 
 `scripts/data/netdisk.py` 管百度网盘开放平台。删除只能进回收站，属于不可逆操作，
-所以规则写死：**任何去重和删除都先出清单、再逐条回报，并留审计日志**。
+所以规则硬编码：**任何去重和删除都先出清单、再逐条回报，并留审计日志**。
 
 - 判重三条同时成立才算重复：完整 32 位 md5、同大小、**同一目录**；
 - 服务端打码的 md5（含非十六进制字符）一律跳过，不参与判重；跨目录的相同文件

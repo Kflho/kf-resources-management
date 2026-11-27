@@ -60,7 +60,7 @@ python scripts/projects/registry.py github --user <github-user> --depth 5 --add
 ```
 
 - `add`：路径必须是 git 仓库且有 remote，否则报错；登记时把当前 remote 一并写进
-  总账，仓库改名后重跑一次 `add` 就能刷新；
+  总账，仓库改名后重执行一次 `add` 就能刷新；
 - `--test` / `--note`：`test` 是测试命令（给 kf-dev 读），`note` 是 **Obsidian 项目笔记的
   vault 相对路径**（如 `postgraduate/pg 01 note.md`）；传空字符串清空；
 - `--test-repo`：测试仓位置，写成 `<测试项目仓名>/<目录名>`（如

@@ -58,4 +58,4 @@ python scripts/config/skills.py scan      # 装了但没登记的 skill
   `kf-proposal-exports` 的 `text_consistency.py` / 文本规范里），标 `optional` 即可；
 - `optional: true`（申报书配图、字幕校对）缺失不算失败，`check` 只提示；
 - 换机器：`hub.py skills import --from <HOST> --apply` 带来清单和路径，补完本机路径
-  跑一次 `install`；skill 配置本身也走 `hub.py skills export`（见 §8）。
+  执行一次 `install`；skill 配置本身也走 `hub.py skills export`（见 §8）。
