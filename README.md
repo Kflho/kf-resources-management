@@ -1,25 +1,48 @@
 # kf-resources-management
 
-kf 所有资源的管理入口：隐私、配置、项目、git、网盘、skill、服务器、文档位置。只回答「放在哪、属于谁、怎么登记」，规范与操作分别去 `kf-standard` 与 `kf-personal-service`。
+kf 所有资源的管理入口：隐私、配置、项目、git、网盘、skill、服务器、文档位置。只回答「放在哪、属于谁、怎么登记」。
 
 ## 目录
 
 | 路径 | 内容 |
 | --- | --- |
 | `SKILL.md` | 资源大类、登记入口与边界 |
-| `references/` | 各资源册子：隐私、项目、清单与分层、配置、git、skill、服务器、文档位置 |
-| `scripts/` | 登记与校验脚本（从 `kf-personal-service` 迁入） |
+| `references/` | 九册资源说明：项目、清单与分层、线下保存、书签、skill、git、信箱、隐私、笔记 |
+| `scripts/` | 登记与校验脚本：`projects/`、`data/`、`config/` |
 | `local.example.json` | 本机配置样例，只留占位符 |
 
-## 与其他 skill 的关系
+## 资源册子
 
-| 关系 | 说明 |
+每类资源一册，册子写口径，命令是入口；两者冲突时以册子为准。
+
+| 资源 | 册子 | 命令 |
+| --- | --- | --- |
+| 项目登记 | `references/projects.md` | `scripts/projects/registry.py` |
+| 跨机器清单与数据分层 | `references/data-hub.md` | `scripts/projects/hub.py`、`scripts/data/` |
+| 线下保存与同步映射 | `references/locally-save.md` | `scripts/projects/sync.py` |
+| 书签与配置数据 | `references/bookmarks.md` | `scripts/config/bookmarks.py` |
+| skill 配置与安装 | `references/skill-install.md` | `scripts/config/skills.py` |
+| git 与 GitHub | `references/gh.md` | `scripts/projects/gh.py` |
+| agent 信箱 | `references/agent-issues.md` | `scripts/projects/gh_mailbox.py` |
+| 隐私数据 | `references/privacy.md` | `kf-personal-development` 的扫描脚本；数据进 `kf-personal-data` |
+| 文档位置与笔记 | `references/notes.md` | `scripts/config/notes.py` |
+
+## 本机配置
+
+`local.json`（gitignored）分节：`projects`（库根与条目）、`data_hub`（私有数据仓路径与远程）、`github`（账号）、`skills`（harness 目录与例外）、`notes`（vault 与文档清单）、`netdisk`（开放平台 token）、`servers`（长期运行资源）。字段含义见 `local.example.json`。
+
+## 仓库分工
+
+| 仓库 | 放什么 |
 | --- | --- |
-| 规范 | `kf-standard`：文字、配图、图表、文档权限与读取分层 |
-| 操作 | `kf-personal-service`：VPN、远程、剪贴板、GUI、格式转换 |
-| 流程 | `kf-personal-development`：调研到发布的流程与闸门 |
-| 产物 | `kf-proposal-exports`：页片、配图产物、文字质量优化 |
+| `kf-personal-data` | 隐私值、跨机器清单、测试状态副本 |
+| `kf-development-project` | 测试代码与开发数据 |
+| 各 skill 仓 | 只放可发布内容，本机路径走 `local.json` |
 
-## 使用
+## 校验
 
-先跑 `notes.py check` 拿到必读清单，再按 `SKILL.md` 的阶段路由读一册。新增资源（项目、仓库、网盘路径、skill）先登记再引用，不散写在文档里。
+```bash
+python scripts/projects/registry.py status       # 总账与本机一致性
+python scripts/projects/hub.py validate          # 清单结构
+python <kf-dev>/scripts/check_all.py --skill .   # 文风、可读性、文本一致性、隐私
+```

@@ -1,0 +1,62 @@
+{
+  "projects": {
+    "roots": [
+      "<projects-root>"
+    ],
+    "items": [
+      {
+        "name": "<project-name>",
+        "path": "<absolute-project-path>",
+        "role": "unknown",
+        "tags": [
+          "<tag>"
+        ],
+        "test": "<test-command>",
+        "note": "<obsidian-note-path>"
+      }
+    ]
+  },
+  "data_hub": {
+    "path": "<data-hub-path>",
+    "repo": "<owner>/<private-data-repo>"
+  },
+  "github": {
+    "user": "<github-user>"
+  },
+  "skills": {
+    "harness_dirs": [
+      "~/.dsh/skills"
+    ],
+    "configs": {}
+  },
+  "notes": {
+    "vault": "<obsidian-vault-root>",
+    "docs": [
+      {
+        "name": "<note-name>",
+        "path": "<path-to>/note.md",
+        "purpose": "which rules this document defines",
+        "tags": [
+          "layout"
+        ]
+      }
+    ],
+    "projects": []
+  },
+  "netdisk": {
+    "access_token": "<baidu-open-platform-token>",
+    "expires_in": 2592000,
+    "scope": "basic netdisk",
+    "note": "开放平台个人体验 token；过期后重新授权，别提交到仓库"
+  },
+  "servers": {
+    "<server-name>": {
+      "host": "<host-or-ip>",
+      "user": "<user>",
+      "port": 22,
+      "identity": "~/.ssh/<key-file>",
+      "os": "windows",
+      "note": "what runs on it"
+    }
+  }
+}
