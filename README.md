@@ -1,6 +1,6 @@
 # kf-resources-management
 
-kf 所有资源的管理入口：隐私、配置、项目、git、网盘、skill、服务器、文档位置。只回答「放在哪、属于谁、怎么登记」。
+本 skill 登记 kf 的资源：隐私、配置、项目、git、网盘、skill、服务器与文档位置。每类资源的位置、归属与登记命令见 `references/`。
 
 ## 目录
 
