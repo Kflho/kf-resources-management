@@ -1,6 +1,6 @@
 ---
 name: kf-resources-management
-description: kf 相关资源的管理：隐私数据（放 kf-personal-data）、配置数据（书签、软件设置、api-key、ssh 密钥）、项目登记与分工、git 与 GitHub、百度网盘、skill 配置与安装、服务器资源、文档位置与仓库归属。要查「东西放在哪、属于哪个库、谁能动」时用它；规范条目见 kf-standard，使用与操作见 kf-personal-service。
+description: kf 资源的管理：资产与清单（项目登记、跨机器清单、网盘、数据分层、线下保存）、配置与账号（书签、软件设置、api-key、ssh 密钥、skill 安装、git 与 GitHub、信箱、隐私）、文档与笔记（文档位置、笔记读取）、服务器资源（watcher、Koishi 等长期运行资源的登记）。适用于要查东西放在哪、属于谁、怎么登记时；规范见 kf-standard，操作见 kf-personal-service。
 ---
 
 # kf-resources-management
@@ -17,15 +17,14 @@ description: kf 相关资源的管理：隐私数据（放 kf-personal-data）�
 
 ## 阶段路由
 
-三组资源各一组触发词，具体任务进 [resources](references/resources.md) 找；登记脚本在本仓 `scripts/`，隐私扫描脚本仍在 `kf-personal-development`。
+先按组定位，再进资源入口册找具体命令。
 
-| 组 | 触发 | 先读 | 入口 |
-| --- | --- | --- | --- |
-| 资产与清单 | 项目登记、总账、项目分工、跨机器清单、网盘、数据分层、线下保存 | [resources](references/resources.md) | `scripts/projects/`、`scripts/data/` |
-| 配置与账号 | 书签、软件设置、api-key、ssh 密钥、skill 安装、git 与 GitHub、agent 信箱、隐私 | [resources](references/resources.md) | `scripts/config/`、`scripts/projects/gh*.py` |
-| 文档与笔记 | 文档放哪、面向谁、笔记怎么读 | [resources](references/resources.md) | `scripts/config/notes.py` |
-| 服务器资源 | watcher、Koishi 等长期运行资源 | `<kf-service>/references/servers.md` | `<kf-service>/scripts/remote/servers.py` |
-
+| 触发 | 先读 | 入口 |
+| --- | --- | --- |
+| 资产与清单：项目登记、总账、项目分工、跨机器清单、网盘、数据分层、线下保存 | [resources](references/resources.md) | `scripts/projects/`、`scripts/data/` |
+| 配置与账号：书签、软件设置、api-key、ssh 密钥、skill 安装、git 与 GitHub、信箱、隐私 | [resources](references/resources.md) | `scripts/config/`、`scripts/projects/gh*.py` |
+| 文档与笔记：文档放哪、面向谁、笔记怎么读 | [resources](references/resources.md) | `scripts/config/notes.py` |
+| 服务器资源：watcher、Koishi 等长期运行资源 | `<kf-service>/references/servers.md` | `<kf-service>/scripts/remote/servers.py` |
 ## 边界
 
 - 规范怎么写（文字、配图、图表、文档权限与读取分层）：`kf-standard`。
