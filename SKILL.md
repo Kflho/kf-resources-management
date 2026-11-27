@@ -17,18 +17,14 @@ kf 的所有资源只有这一个入口：隐私、配置、项目、git、网�
 
 ## 阶段路由
 
-册子已经迁到本仓 `references/`；登记与校验脚本仍由 `kf-personal-service` 提供，脚本迁入前按下表的位置调用。
+三组资源各一组触发词，具体任务进 [resources](references/resources.md) 找；登记脚本在本仓 `scripts/`，隐私扫描脚本仍在 `kf-personal-development`。
 
-| 资源 | 触发 | 册子 | 入口 |
+| 组 | 触发 | 先读 | 入口 |
 | --- | --- | --- | --- |
-| 隐私数据 | 隐私、token、密钥、本机路径、用户信息 | [privacy](references/privacy.md) | `<kf-dev>/scripts/privacy/scan.py`；数据进 `kf-personal-data` |
-| 项目登记 | 项目在哪、属于哪个库、对应哪个笔记、测试仓在哪 | [projects](references/projects.md) | `scripts/projects/registry.py` |
-| 跨机器清单与数据分层 | 两台机器、网盘放哪一层、线下保存与同步映射 | [data-hub](references/data-hub.md)、[locally-save](references/locally-save.md) | `scripts/projects/hub.py`、`scripts/data/` |
-| 配置数据 | 书签、软件设置、api-key、ssh 密钥 | [bookmarks](references/bookmarks.md) | `scripts/config/bookmarks.py` |
-| git 与 GitHub | 仓库与远程、发布入口、agent 信箱 | [gh](references/gh.md)、[agent-issues](references/agent-issues.md) | `scripts/projects/gh.py`、`gh_mailbox.py` |
-| skill 配置与安装 | skill 装在哪、清单、启用与停用 | [skill-install](references/skill-install.md) | `scripts/config/skills.py` |
+| 资产与清单 | 项目登记、总账、项目分工、跨机器清单、网盘、数据分层、线下保存 | [resources](references/resources.md) | `scripts/projects/`、`scripts/data/` |
+| 配置与账号 | 书签、软件设置、api-key、ssh 密钥、skill 安装、git 与 GitHub、agent 信箱、隐私 | [resources](references/resources.md) | `scripts/config/`、`scripts/projects/gh*.py` |
+| 文档与笔记 | 文档放哪、面向谁、笔记怎么读 | [resources](references/resources.md) | `scripts/config/notes.py` |
 | 服务器资源 | watcher、Koishi 等长期运行资源 | `<kf-service>/references/servers.md` | `<kf-service>/scripts/remote/servers.py` |
-| 文档位置与笔记清单 | 文档放哪、面向谁、笔记怎么读 | [notes](references/notes.md) | `scripts/config/notes.py` |
 
 ## 边界
 
