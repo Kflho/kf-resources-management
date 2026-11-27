@@ -1,0 +1,14 @@
+local.json
+local.*.json
+!local.example.json
+__pycache__/
+*.pyc
+.pytest_cache/
+SYNCED.json
+logs/
+temp/
+
+# 开发草稿与临时产物留在项目里，不进仓库
+dev/
+release/
+RELEASE.json

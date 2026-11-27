@@ -1,0 +1,22 @@
+{
+  "name": "kf-resources-management",
+  "branch": "main",
+  "include": [
+    "SKILL.md",
+    "README.md",
+    ".gitignore",
+    "release-config.json",
+    "local.example.json",
+    "references/",
+    "scripts/"
+  ],
+  "exclude": [
+    "local.json",
+    "tests/",
+    "dev/",
+    "temp/",
+    "pytest.ini",
+    "SYNCED.json",
+    "RELEASE.json"
+  ]
+}
