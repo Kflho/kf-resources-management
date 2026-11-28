@@ -36,7 +36,7 @@ skill 的 gitignored `local.json`：
 `.gitignore` 排除，不为了发布再开一份镜像仓库。总账里一个项目一条记录，`path`
 同时是开发目录和使用目录。
 
-只有发布物必须是源码子集时才拆发布仓（本 skill 自己就是这样：`release.json`
+只有发布物必须是源码子集时才拆发布仓（本 skill 自己就是这样：`release.json`（人工：登记项目时按本节核对）
 白名单加 `dev/` 隔离）。拆分是例外，不是默认。
 
 ## 命令
@@ -59,7 +59,7 @@ python scripts/projects/registry.py prune
 python scripts/projects/registry.py github --user <github-user> --depth 5 --add
 ```
 
-- `add`：路径必须是 git 仓库且有 remote，否则报错；登记时把当前 remote 一并写进
+- `add`：路径必须是 git 仓库且有 remote，否则报错；登记时把当前 remote 一并写进（scripts/registry.py）
   总账，仓库改名后重执行一次 `add` 就能刷新；
 - `--test` / `--note`：`test` 是测试命令（给 kf-dev 读），`note` 是 **Obsidian 项目笔记的
   vault 相对路径**（如 `postgraduate/pg 01 note.md`）；传空字符串清空；
@@ -69,13 +69,13 @@ python scripts/projects/registry.py github --user <github-user> --depth 5 --add
   传空字符串清空；
 - `status --check-test-repo`：登记的每个 `test_repo` 都要能解析到本机目录，否则退出 1。
   测试仓搬走、改名、没 clone 时由它报出来，别靠人记；
-- **项目和笔记必须关联**：内容型项目（`tags` 含 `skill` / `script` / `koishi` / `plugin` /
-  `research`）登记时必须给 `--note`，且文件要真实存在；`status --require-note` 就是这把闸门
+- **项目和笔记必须关联**：内容型项目（`tags` 含 `skill` / `script` / `koishi` / `plugin` /（scripts/registry.py）
+  `research`）登记时必须给 `--note`，且文件要真实存在；`status --require-note` 就是这把闸门（scripts/registry.py）
   （缺 note 或指向不存在的文件 → 退出 1）。纯代码仓 / 领域根这类条目不强制；
 - 笔记里的 `# tests` 与 `project list.md` 的 `## tests` 都要和这个项目对得上
   （写法见 `kf-personal-development/references/post-dev-check.md`）；
 - `role`：标记 `user-facing` / `development` / `test` / `archive`；`test` 用于测试项目仓本身。
-  新登记默认 `unknown`，发布前必须问用户；
+  新登记默认 `unknown`，发布前必须问用户；（scripts/registry.py）
 - `scan`：在 roots 下找 `.git` 加 remote，找到即停，不进入子目录；
 - `prune`：删除路径不存在或已无 remote 的条目；
 - `status`：显示 branch、head、dirty、remote，以及 `test` / `note` 是否存在
@@ -97,7 +97,7 @@ python scripts/projects/registry.py github --user <github-user> --depth 5 --add
 - 远程地址的唯一真源是 `local.json` 的 `projects.items[].remote`（机器级、
   gitignored）；跨机器可见的副本是私库的 `machines/<HOST>.json`；
 - 本地缺某个仓库时，按 `name` / `remote` 去 GitHub 找，clone 到对应编号目录，
-  **不要新建空仓库顶替**，否则两边历史不一致；
+  **不要新建空仓库顶替**，否则两边历史不一致；（人工：登记项目时按本节核对）
 - 仓库改名后，GitHub 重定向还能拉取，但 `github --user` 会匹配不上：重跑
   `registry.py add <path>` 刷新 `remote`，再导出清单。
 
@@ -110,11 +110,11 @@ python scripts/projects/registry.py github --user <github-user> --depth 5 --add
 临时目录，跑完即删）。仓库 clone 固定放 `kf/projects/kf-development-project`
 （main 分支 + `obsidian/lsave-test` 放包的分支）；**不再保留** `test/lsave-test-vault/`、
 `test/kf-development-project-init/`、`kf-development-project-shelves/obsidian-test/`
-这些固定副本，手工复现场景时临时建。项目一律放 `<领域根>/<分类>/projects/<前缀>_<编号>/`，
+这些固定副本，手工复现场景时临时建。项目一律放 `<领域根>/<分类>/projects/<前缀>_<编号>/`，（人工：登记项目时按本节核对）
 个人数据仓是 `<领域根>/kf/projects/kf-personal-data`（盘符与领域根每台机器不同，
 文档只写相对结构）。
 
-测试用的临时产物（vault、包、pytest 缓存）放该项目的 `dev/`，不要留在盘根或领域根：
+测试用的临时产物（vault、包、pytest 缓存）放该项目的 `dev/`，不要留在盘根或领域根：（人工：登记项目时按本节核对）
 
 ```bash
 pytest -o cache_dir=<项目>/dev/.pytest_cache
@@ -126,7 +126,7 @@ pytest -o cache_dir=<项目>/dev/.pytest_cache
 个人数据仓和主 vault 的包目录仍按个人配置管理，不并进测试项目仓。
 
 判型脚本和标准都在 `kf-personal-development`：`<kf-dev>/scripts/projects/layout.py` 输出
-`simple` / `code-library` / `formal` / `docs-only`，判断要不要拆 `src/`、`data/`、
+`simple` / `code-library` / `formal` / `docs-only`，判断要不要拆 `src/`、`data/`、（人工：登记项目时按本节核对）
 `bin/`；标准见 `kf-personal-development` 的 `docs.md`。
 
 ## 跨机器目录结构一致
@@ -136,7 +136,7 @@ pytest -o cache_dir=<项目>/dev/.pytest_cache
 
 ```text
 linear_system/
-  bin/reference_docs/   # 课程 PDF、讲义、表格（不进 git）
+  bin/reference_docs/   # 课程 PDF、讲义、表格（不提交到 Git）
   projects/             # 仓库 clone，根目录直接是 exercises/、experiments/
 ```
 
@@ -152,7 +152,7 @@ linear_system/
 
 - 项目绝对路径只写 `local.json`，发布仓不包含；
 - `local.json` 已被 `.gitignore` 忽略，`release.py verify` 也会拦；
-- 不要在 README 或 SKILL 里写具体用户目录；
+- 不要在 README 或 SKILL 里写具体用户目录；（人工：登记项目时按本节核对）
 - 相对仓库路径允许，绝对本机路径不允许进发布仓。
 
 ## 按 GitHub 账号对齐

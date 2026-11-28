@@ -27,14 +27,14 @@ description: kf 资源的管理：资产与清单（项目登记、跨机器清�
 | 服务器资源：watcher、Koishi 等长期运行资源 | `<kf-service>/references/servers.md` | `<kf-service>/scripts/remote/servers.py` |
 ## 边界
 
-- 规范怎么写（文字、配图、图表、文档权限与读取分层）：`kf-standard`。
+- 规范怎么写（文字、配图、图表、文档权限与读取分层）：`kf-standard`；文字质量与去 AI 味按 `kf-proposal-exports` 的 `text-quality.md`。
 - 怎么操作（VPN、远程、剪贴板、GUI、格式转换）：`kf-personal-service`。
-- 开发流程与发布：`kf-personal-development`；产物形态：`kf-proposal-exports`。
+- 开发流程与发布：`kf-personal-development`；产物形态与界面规范：`kf-proposal-exports`。
 
 ## 隔离线
 
 1. 隐私值与机器专属信息只进 `local.json` 与私有数据仓 `kf-personal-data`，不进任何发布仓。
-2. 文档里写路径一律用占位符（`<HOST>`、`<path-to>`），不写本机绝对路径。
+2. 文档里写路径一律用占位符（`<HOST>`、`<path-to>`），不写本机绝对路径。（人工：按资源归属与文档规则核对）
 3. 笔记核心内容只读；要改先停下报告。
 
 ## 参考

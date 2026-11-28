@@ -12,7 +12,7 @@
 | 本机路径 | `local.json` 里的安装目录、vault、包目录、`AppData` | 本机 `local.json`；文档写占位符 `<盘符>:\...` |
 | 个人资料 | 书签、笔记正文、软件配置快照 | 数据仓 `bookmarks/`、`skills/`；主 vault 由 locally-save 搬运 |
 
-规则：**实际值只进 `local.json` 或数据仓**；文档、代码、脚本示例一律占位符
+规则：**实际值只进 `local.json` 或数据仓**；文档、代码、脚本示例一律占位符（人工：发布前按隐私清单核对）
 （`<HOST>`、`<tencent-host>`、`<盘符>:\Users\<name>\...`）。
 
 ## 怎么查

@@ -100,7 +100,7 @@ python scripts/config/bookmarks.py vivaldi apply --close --disable-sync
 
 写回的是 `<profile>/Bookmarks`（Chromium JSON）。三条硬约束，都是实测踩出来的：
 
-1. **checksum 必须对**。算法是 `id + 标题(UTF-16LE) + 类型(+url)` 的前序拼接取
+1. **checksum 必须对**。算法是 `id + 标题(UTF-16LE) + 类型(+url)` 的前序拼接取（scripts/bookmarks.py）
    MD5；Vivaldi 把 `trash` 也一起算（上游 Chromium 只算 `bookmark_bar` /
    `other` / `synced`）。算错会被 Vivaldi 当损坏文件、从 `.bak` 回退。
    `vivaldi verify` 先用现有文件验证：`stored == computed` 才说明算法对得上。

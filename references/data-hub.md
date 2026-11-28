@@ -21,7 +21,7 @@
       <HOST>.json            # 旧布局，只读兼容，新布局导出后可以删
 ```
 
-一台机器一个文件，文件名用 `COMPUTERNAME`。不要改另一台机器的文件。
+一台机器一个文件，文件名用 `COMPUTERNAME`。不要改另一台机器的文件。（scripts/hub.py）
 其他 skill 接入时建自己的 `<skill>/` 目录，不混放；skill 配置由
 kf-personal-service 统一管，集中放在 `skills/` 下。
 
@@ -63,9 +63,9 @@ obsidian/lsave-test:             # orphan 分支，只做 locally-save 测试用
 
 - **测试按项目存放**：每个项目一个顶层目录（`<项目名>-test/`），测试代码、夹具、测试用的包目录、
   `full/` 都在这个仓里；目录与项目的对应关系记在项目总账的 `test_repo` 字段；
-- `src` / `node_modules` 只是本机链接，不进 git；测试项目运行 `npm test` 前先建链接；
-- 测试用的包目录：clone 该分支，clone 根直接做插件 `bundleDir`；`full/` 只留本机、不进 git；
-- 测试 vault：用 `seed-test-vault.ps1 -Target <vault> -Clean` 从夹具重建，两边夹具必须一致
+- `src` / `node_modules` 只是本机链接，不提交到 Git；测试项目运行 `npm test` 前先建链接；
+- 测试用的包目录：clone 该分支，clone 根直接做插件 `bundleDir`；`full/` 只留本机、不提交到 Git；
+- 测试 vault：用 `seed-test-vault.ps1 -Target <vault> -Clean` 从夹具重建，两边夹具必须一致（人工：发布数据前按本节核对）
   （否则 `stateId` 的 `dirs` 不一致）；
 - 初始完整包按需在机器之间单独传，不放进仓库；
 - 夹具是仓库里的测试数据，不是用户笔记；用户 Obsidian 笔记仍然只读。
@@ -97,7 +97,7 @@ obsidian/lsave-test:             # orphan 分支，只做 locally-save 测试用
 - `local_dir` 只写文件夹名，不写绝对路径；
 - `remote` 写仓库地址，方便另一台电脑对齐；
 - 不放 token、密钥、本机绝对路径、文件内容；
-- 需要传大文件时用网盘/Git LFS，不要写进私有数据仓。
+- 需要传大文件时用网盘/Git LFS，不要写进私有数据仓。（人工：发布数据前按本节核对）
 
 ## 导出/校验
 
@@ -122,8 +122,8 @@ python scripts/projects/hub.py compare --json
 
 输出三类：
 
-- `missing on <HOST>`：某台机器缺的仓库，按 `remote` clone 到对应编号目录，不要新建空仓库；
-- `remote mismatch`：同名指向不同仓库，先核对再改，不要直接覆盖本地；
+- `missing on <HOST>`：某台机器缺的仓库，按 `remote` clone 到对应编号目录，不要新建空仓库；（scripts/remote.py）
+- `remote mismatch`：同名指向不同仓库，先核对再改，不要直接覆盖本地；（scripts/remote.py）
 - `same repo, different URL form`：同一仓库的 ssh / https 写法差异，不用处理。
 
 对齐顺序：先 `pull` 拿最新清单 → `compare` → 补齐缺的仓库 → 再导出自己的清单。
@@ -166,12 +166,12 @@ python scripts/projects/hub.py compare --json
    按 name/remote 对齐，不直接套用 local_dir
 ```
 
-- **数据仓只存数据，不留历史**：写入一律走 `hub_publish.py`（无父提交 +
-  `push --force-with-lease`），不要用 `git commit` + `git push` 普通提交 ——
-  2026-11-23 实测那样攒到了 1.48 GiB，拉取超时导致两台机器三个多小时没有同步；
+- **数据仓只存数据，不留历史**：写入一律走 `hub_publish.py`（无父提交 +（scripts/hub_publish.py）
+  `push --force-with-lease`），不要用 `git commit` + `git push` 普通提交 ——（scripts/hub_publish.py）
+  2026-11-23 实测那样累积到了 1.48 GiB，拉取超时导致两台机器三个多小时没有同步；
 - `hub.py export --publish` 与 `hub.py skills export --publish` 一条命令做完「写文件 +
   发布」，内部就是调 `hub_publish.py`；写别的东西（测试记录等）也用它，
-  不要另写一份提交逻辑；
+  不要另写一份提交逻辑；（scripts/hub_publish.py）
 - 拉取用 `fetch` + `reset --hard`，因为本地和远端只有一个无父提交，没有共同祖先；
 - 远程被别的机器抢先推过时 `hub_publish.py` 会取回远端重试一次，
   只提交自己的路径，不覆盖对方的文件；
@@ -228,7 +228,7 @@ python scripts/projects/hub.py skills validate <file-or-dir>
 所以规则硬编码：**任何去重和删除都先出清单、再逐条回报，并留审计日志**。
 
 - 判重三条同时成立才算重复：完整 32 位 md5、同大小、**同一目录**；
-- 服务端打码的 md5（含非十六进制字符）一律跳过，不参与判重；跨目录的相同文件
+- 服务端打码的 md5（含非十六进制字符）一律跳过，不参与判重；跨目录的相同文件（人工：发布数据前按本节核对）
   视为用户有意保留的副本，同样跳过；
 - `dups` 只写清单（`temp/nd_dups.md` 给人看、`temp/nd_plan.json` 给 `rm` 用），
   命令输出明确写「不会删除任何文件」；
@@ -248,5 +248,5 @@ python scripts/projects/hub.py skills validate <file-or-dir>
 python <kf-dev>/scripts/privacy/scan.py --root <hub>
 ```
 
-不要把 `local.json`、token、绝对路径、客户数据、原始素材提交进去。
+不要把 `local.json`、token、绝对路径、客户数据、原始素材提交进去。（人工：发布数据前按本节核对）
 配置导出文件只放可移植值，机器路径以 `<machine-local>` 占位。

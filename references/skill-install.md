@@ -18,10 +18,10 @@ python <kf-dev>/scripts/skills/manage.py sync <skill-dir> \
 - 两个约定目录并存：Claude Code 读 `~/.agents/skills`，DeepSeek Harness 读
   `~/.dsh/skills`，DSH 兼容 CC 的 `.agents` 约定；各机器用哪个都合法；
 - manage.py 默认目标是 `~/.agents/skills`；本机 DSH 用 `~/.dsh/skills`，所以要么设
-  `AGENTS_SKILLS_DIR`（根目录），要么 `--target` 指到**具体 skill 目录**，不要靠猜；
+  `AGENTS_SKILLS_DIR`（根目录），要么 `--target` 指到**具体 skill 目录**，不要靠猜；（scripts/skills.py）
 - 复制模式把运行时文件一并复制过去（`SKILL.md`、`README.md`、`references/`、`scripts/`、`rules/`、
   `local.example.json`、`local.json`），`tests/`、`dev/`、`__pycache__` 不进去；
-- 目标已是 junction 时先删链接再复制，不要往链接里写副本。
+- 目标已是 junction 时先删链接再复制，不要往链接里写副本。（scripts/skills.py）
 
 ## 碰到问题先加载对应 skill
 

@@ -22,8 +22,8 @@ locally-save 插件把 vault 导成一个 `.lsave` 包，另一台机器应用�
   说明应用完就到达包声明的目标状态（两边在同一历史线上）；
 - 兄弟包/危险包仍然拒收；都不匹配才需要导出 full 镜像。
 
-`stateId` 里的 **dirs 也参与比较**：两边空目录集合不同就会一直 mismatch。测试 vault 必须用
-`kf-development-project` 的 canonical 夹具 + `seed-test-vault.ps1 -Clean` 重建，不要各自维护。
+`stateId` 里的 **dirs 也参与比较**：两边空目录集合不同就会一直 mismatch。测试 vault 必须用（人工：测试 vault 与插件操作前按本节核对）
+`kf-development-project` 的 canonical 夹具 + `seed-test-vault.ps1 -Clean` 重建，不要各自维护。（人工：测试 vault 与插件操作前按本节核对）
 
 ## 首次交接
 
@@ -56,7 +56,7 @@ locally-save 插件把 vault 导成一个 `.lsave` 包，另一台机器应用�
 - **首选（`sc_03 f7d73c1` 起）**：打开设置里的 **`autoApplyIncomingBoth`**
   （设置 → 应用与校验，默认关）。打开后 `both` 接收更新包**不再弹确认**，直接按
   `mirror/alignToPeer` 应用；REST `sync-now` 不会挂起，适合无人值守。默认关时行为不变；
-- 自动化取消：对窗口发 **Esc**（= 取消），不要靠坐标点按钮；
+- 自动化取消：对窗口发 **Esc**（= 取消），不要靠坐标点按钮；（人工：测试 vault 与插件操作前按本节核对）
 - 旧版没有 `autoApplyIncomingBoth` 时，才用 workaround：临时把 `syncDirection` 改
   `download`（仅拉、无确认）→ `app:reload`；reload 后设置没生效再重启 Obsidian → `sync-now`；
   应用完改回 `both`；
@@ -93,7 +93,7 @@ incoming 最后几条（applied / dismissed / needs-review）
 - 读法：REST `GET /vault/<configDir>/plugins/locally-save/debug.log`，
   或直接读文件；只看 `incoming.failed` 时用 `Select-String '"event":"incoming.failed"'`。
 - 「基准不一致 / 算不出计划」这类 `planBundleApply` 抛错，message 和 stack 都在里面，
-  要定位 283 那一类问题，先看这条日志，不要靠猜。
+  要定位 283 那一类问题，先看这条日志，不要靠猜。（人工：测试 vault 与插件操作前按本节核对）
 
 ## 安全
 
@@ -113,7 +113,7 @@ incoming 最后几条（applied / dismissed / needs-review）
 - 典型现象：329 缺 `project note`；330 补上后修回；331/332 路径相同但
   `sk 02 note`、`project list` 内容不同，332 才修回。
 - 约定：**同一同步周期只允许一个写方**；另一边只应用/回执；应用前关掉正在编辑的笔记；
-  两边都必须改时，以最后一份包为准，或直接发 full。
+  两边都必须改时，以最后一份包为准，或直接发 full。（人工：测试 vault 与插件操作前按本节核对）
 
 ## 故障对照
 
